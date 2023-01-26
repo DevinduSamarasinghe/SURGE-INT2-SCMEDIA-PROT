@@ -12,6 +12,8 @@ import {Header,Sidebar,ThemeSettings} from "../components";
 const MainPage = () =>{
     const {setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor,themeSettings, setThemeSettings} = useStateContext();
     const [Post,setPost] = useState([]);
+
+
     
     // Calling Axios
      const getPosts = async()=>{
@@ -22,6 +24,17 @@ const MainPage = () =>{
         })
     }
     
+    const postSorter = (post)=>{    //This methods sorts first by recent date and then highest likes
+        post.sort(
+            function(a, b) {          
+               if (a.postedDate == b.postedDate) {
+                  return b.likes - a.likes;
+               }
+               return b.postedDate > a.postedDate ? 1 : -1;
+            });
+        console.log(post);
+    }
+
     const likePost = async(id)=>{
         await axios.patch(`http://localhost:8060/feed/likePost/${id}`).then((res)=>{
             console.log(res);
@@ -84,6 +97,7 @@ const MainPage = () =>{
                             <div className='m-1 md:m-5  p-2 md:p-10 bg-white rounded-3xl  dark:bg-secondary-dark-bg dark:text-white '>
                              <Header category="Surge" title="Main Feed" />
                             {Post.map((data,key)=>{
+                                postSorter(Post);
                                 return(
                                     <div className="relative content-center "key={key}>
                                         <div className="p-1 content-center">
