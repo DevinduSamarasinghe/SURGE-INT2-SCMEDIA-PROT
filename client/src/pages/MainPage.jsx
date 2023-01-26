@@ -36,7 +36,7 @@ const MainPage = () =>{
     }
 
     const likePost = async(id)=>{
-        await axios.patch(`http://localhost:8060/feed/likePost/${id}`).then((res)=>{
+        await axios.patch(`http://localhost:8060/likePost/${id}`).then((res)=>{
             console.log(res);
         }).catch((err)=>{
             console.log(err);

@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({limit:"30mb",extended:true}));
 app.use(cors());
 
 //assigning routes
-app.use('/feed',postRouter);
+app.use('/',postRouter);
 
 //mongoDB
 const PORT = process.env.PORT || 8060;
