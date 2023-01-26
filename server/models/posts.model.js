@@ -19,7 +19,9 @@ const postSchema = new Schema({
         type: String,
         required: true
     },
-    likes: Number,
+    likes:{
+        type: Number
+    } 
     //comments: [String],
 });
 

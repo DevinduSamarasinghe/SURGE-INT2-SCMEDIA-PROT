@@ -2,36 +2,38 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MdOutlineCancel } from 'react-icons/md';
+
 import { useStateContext } from '../contexts/ContextProvider';
 
-const ThemeSettings = () => {
-  const { setColor, setMode, currentMode, currentColor, themeSetting,setThemeSettings } = useStateContext();
+const PostCreate = () => {
+  const { setColor, setMode, currentMode, currentColor, setPostSettings } = useStateContext();
 
   
   const [username, setUsername] = useState();
   const [title,setTitle] = useState();
   const [beforePost,setPost] = useState({myFile:""});
 
+
   
+
   const likes = 0;
   const postedDate = new Date().toISOString().split('T')[0];
 
   const navigate = useNavigate(); //cerating navigation methods
 
   useEffect(()=>{
-
   },[]);
 
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">
-      <div className="overflow-auto float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-94">
-        <div className="flex justify-between items-center p-5">
-          <p className="items-centerfont-semibold text-lg">Upload Photo and Preferences</p>
+      <div className="float-right h-screen dark:text-gray-200  bg-white dark:bg-[#484B52] w-94">
+        <div className="flex justify-between items-center p-10">
+          <p className="items-centerfont-semibold text-lg">Settings</p>
           <button
             type="button"
-            onClick={() => setThemeSettings(false)}
+            onClick={() => setPostSettings(false)}
             style={{ color: 'rgb(153, 171, 180)', borderRadius: '50%' }}
-            className="text-2xl p-3 hover:drop-shadow-xl hover:bg-light-gray"
+            className="text-2xl p-3 hover:drop-shadow-xl hover:bg-light-gray mr-20"
           >
             <MdOutlineCancel />
           </button>
@@ -72,7 +74,7 @@ const ThemeSettings = () => {
           </div>
         </div>
         <div className="p-4 border-t-1 border-color ml-4">
-          <p className="font-semibold text-xl ">Upload Photo</p>
+          <p className="font-semibold text-xl ">Theme Colors</p>
           <div className="flex gap-3">
 
           <div>
@@ -93,7 +95,7 @@ const ThemeSettings = () => {
                                     console.log(newPost)
                                     await axios.post("http://localhost:8060/feed/createPost",newPost).then((res)=>{
                                         alert("Data Saved Successfully!");
-                                        navigate("/");
+                                        navigate("/feed");
                                     }).catch((err)=>{
                                         console.log(err);
                                         alert(err);
@@ -132,6 +134,7 @@ const ThemeSettings = () => {
                                         placeholder="Write your thoughts here."
                                         onChange={async (e)=>{
                                             setTitle(e.target.value);
+                                        
                                             }}>
                                         </textarea>
                                 </div>
@@ -147,7 +150,7 @@ const ThemeSettings = () => {
   );
 };
 
-export default ThemeSettings;
+export default PostCreate;
 
 function convertToBase64(file){
   return new Promise((resolve,reject)=>{
