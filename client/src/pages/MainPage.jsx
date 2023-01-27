@@ -4,7 +4,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import {BiLike} from 'react-icons/bi';
 import {RiImageAddLine} from 'react-icons/ri';
-import {Header,Sidebar,ThemeSettings} from "../components";
+import {Header,Sidebar,ThemeSettings,Navbar} from "../components";
 import jwtDecode from "jwt-decode";
 
 
@@ -21,8 +21,9 @@ const MainPage = () =>{
     const [Post,setPost] = useState([]);
 
     const [user,setUser] = useState(logUser);
-    console.log("Value :" + JSON.stringify(user.username));
-
+    let username = JSON.stringify(user.username);
+    username = username.replace(/"/g,'');
+    
     useEffect(()=>{
 
     })
@@ -101,13 +102,17 @@ const MainPage = () =>{
                         ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
                         : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
                     }>
+                                                {/* NAVBAR IMPLEMENTATION */}
+                        <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+                            <Navbar />
+                        </div>
 
                         {/* Navbar Implementation has to be redone  */}
                         <div>
                             
                             {themeSettings && <ThemeSettings />}
                             <div className='m-1 md:m-5  p-2 md:p-10 bg-white rounded-3xl  dark:bg-secondary-dark-bg dark:text-white '>
-                             <Header category="Surge" title="Main Feed" />
+                             <Header category={`Hello ${username}`} title="Main Feed" />
                             {Post.map((data,key)=>{
                                 postSorter(Post);
                                 return(

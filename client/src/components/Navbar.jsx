@@ -37,7 +37,7 @@ const Navbar = () => {
     setScreenSize,
     screenSize,
   } = useStateContext();
-  const user = JSON.parse(localStorage.getItem('userInfo'));
+  const user = JSON.parse(localStorage.getItem('token'));
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);

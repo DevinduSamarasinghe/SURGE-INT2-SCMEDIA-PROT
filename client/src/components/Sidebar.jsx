@@ -33,7 +33,7 @@ const Sidebar = () => {
         <>
           <div className="flex justify-between items-center">
             <Link
-              to="/"
+              to="/feed"
               onClick={handleCloseSideBar}
               className="items-center gap-3 ml-3 mr-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >
@@ -61,7 +61,7 @@ const Sidebar = () => {
             {/*  links ---------------------------------------------------------------------------------- links  */}
 
             <NavLink
-              to="/#"
+              to="/feed"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 // backgroundColor: isActive ? currentColor : '',
@@ -75,7 +75,7 @@ const Sidebar = () => {
             {/*  links ---------------------------------------------------------------------------------- links  */}
 
             <NavLink
-              to="/##"
+              to="/feed"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 // backgroundColor: isActive ? currentColor : '',
@@ -90,11 +90,9 @@ const Sidebar = () => {
             <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
               Marketplace {/*  menu name  */}
             </p>
-
-
-
+            
             <NavLink
-              to="/SalaryDashboard"
+              to="/feed"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : '',
@@ -106,7 +104,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
-              to="/SalaryDashboard"
+              to="/#"
               onClick={handleCloseSideBar}
               style={({ isActive }) => ({
                 backgroundColor: isActive ? currentColor : '',

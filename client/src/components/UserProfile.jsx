@@ -1,22 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '.';
-import { userProfileData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 import KG from '../data/KG.png';
+import jwtDecode from "jwt-decode";
+
+let logUser;
+if(localStorage.token){
+    //console.log("Do we have the data?")
+    const jwt = JSON.parse(localStorage.getItem('token'));
+    logUser = jwtDecode(jwt);
+    
+}
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
+
+
+  const [user,setUser] = useState(logUser);
+  //console.log("Value :" + JSON.stringify(user.username));
+  let value = JSON.stringify(user.username);
+  value = value.replace(/"/g,'');
+  const username = value;
 
   const handleLogout = () => {
-    localStorage.removeItem('userInfo');
-    navigate('/');
+    localStorage.removeItem('token');
+    window.location("/");
   };
 
-  const user = JSON.parse(localStorage.getItem('userInfo'));
+  //const user = JSON.parse(localStorage.getItem('token'));
+  //console.log(JSON.stringify(user));
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -38,11 +53,11 @@ const UserProfile = () => {
         />
         <div>
           <p className="font-semibold text-xl dark:text-gray-200 text-transform: capitalize">
-            {user.userName}
+            {user.username}
             {/* Michael Roberts */}
           </p>
           <p className="text-gray-500 text-sm dark:text-gray-400">
-            {user.role}
+            {user.name}
             {/* Administrator */}
           </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400">

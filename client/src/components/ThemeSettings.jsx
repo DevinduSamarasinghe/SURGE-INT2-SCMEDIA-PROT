@@ -26,7 +26,8 @@ const ThemeSettings = () => {
   let value = JSON.stringify(user.username);
   value = value.replace(/"/g,'');
   const username = value;
-  console.log("Passed Down Value " + username);
+
+  //console.log("Passed Down Value " + username);
   
 
   const likes = 0;
@@ -106,7 +107,7 @@ const ThemeSettings = () => {
                                         postedDate,
                                         likes
                                     }
-                                    console.log(newPost)
+                                    //console.log(newPost)
                                     await axios.post("http://localhost:8060/createPost",newPost).then((res)=>{
                                         alert("Data Saved Successfully!");
                                         window.location("/feed");
@@ -127,7 +128,7 @@ const ThemeSettings = () => {
                                         </div>
                                         <input id="dropzone-file" type="file" class="hidden" onChange={async (e)=>{
                                         setPost(e.target.files[0]);
-                                        console.log(beforePost);
+                                        //console.log(beforePost);
                                     }}/>
                                     </label>
                                 </div>
