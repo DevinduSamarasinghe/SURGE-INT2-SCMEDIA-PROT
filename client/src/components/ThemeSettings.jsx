@@ -3,16 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MdOutlineCancel } from 'react-icons/md';
 import { useStateContext } from '../contexts/ContextProvider';
+import jwtDecode from "jwt-decode";
+
+let logUser;
+if(localStorage.token){
+    //console.log("Do we have the data?")
+    const jwt = JSON.parse(localStorage.getItem('token'));
+    logUser = jwtDecode(jwt);
+    
+}
 
 const ThemeSettings = () => {
   const { setColor, setMode, currentMode, currentColor, themeSetting,setThemeSettings } = useStateContext();
 
   
-  const [username, setUsername] = useState();
+  //const [username, setUsername] = useState();
   const [title,setTitle] = useState();
   const [beforePost,setPost] = useState({myFile:""});
 
+  const [user,setUser] = useState(logUser);
+  //console.log("Value :" + JSON.stringify(user.username));
+  let value = JSON.stringify(user.username);
+  value = value.replace(/"/g,'');
+  const username = value;
+  console.log("Passed Down Value " + username);
   
+
   const likes = 0;
   const postedDate = new Date().toISOString().split('T')[0];
 
@@ -91,24 +107,15 @@ const ThemeSettings = () => {
                                         likes
                                     }
                                     console.log(newPost)
-                                    await axios.post("http://localhost:8060/feed/createPost",newPost).then((res)=>{
+                                    await axios.post("http://localhost:8060/createPost",newPost).then((res)=>{
                                         alert("Data Saved Successfully!");
-                                        navigate("/");
+                                        window.location("/feed");
                                     }).catch((err)=>{
                                         console.log(err);
                                         alert(err);
                                     })
                                 }}>
 
-                                <div className="mb-3">
-                                    <label for="employeeNumber" className="form-label">Username(Tentative):</label>
-                                    <input type="text" className="mt-1 block w-800 rounded-md bg-gray-100 focus:bg-white dark:text-black" 
-                                    id="username" placeholder="Enter the Username" 
-                                    title= {"The Employee Number requires a 4 digit number"} value={username} required 
-                                    onChange={(e)=>{
-                                    setUsername(e.target.value);
-                                    }}/>
-                                </div>
 
                                 
                                 <div class="flex items-center justify-center w-full">
@@ -125,7 +132,7 @@ const ThemeSettings = () => {
                                     </label>
                                 </div>
                                 <div className="mb-3">
-                                    <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
+                                    <label for="message" class="block w-800 mb-2 text-sm font-medium text-gray-900 dark:text-white">Add a caption</label>
                                         <textarea id="message" 
                                         rows="4" 
                                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 

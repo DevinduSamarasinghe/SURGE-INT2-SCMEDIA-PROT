@@ -18,7 +18,7 @@ export const registerUser = async(req,res)=>{
         await user.save();
 
         //generate JWT token 
-        const jwtData = {_id: user._id, name: user.email}
+        const jwtData = {_id: user._id, name: user.email, username: user.username }
         const token = jwt.sign(jwtData, process.env.JWTSECRET,{expiresIn: "2h"});
 
         res.status(201).json(token);
@@ -34,7 +34,7 @@ export const authUser = async(req,res)=>{
     let user = await User.findOne({email,password});
     if(!user) return res.status(400).send("Invalid username or password");
 
-    const jwtData = {_id: user._id, name: user.email}
+    const jwtData = {_id: user._id, name: user.email,username: user.username}
     const token = jwt.sign(jwtData, process.env.JWTSECRET,{expiresIn: "2h"});
 
     res.status(201).json(token);
@@ -43,4 +43,28 @@ export const authUser = async(req,res)=>{
 export const getUser = async(req,res)=>{
     const profile = await User.findById(req.user._id);
     res.send(profile);
+}
+
+
+export const deleteUser = async(req,res)=>{
+    try{
+        const id = req.params.id;
+        await User.findByIdAndDelete(id);
+        res.status(200).json({
+            status: "User details deleted"
+        })
+    }catch(error){
+        res.status(404).json({message: error});
+    }
+}
+
+export const getAllUsers = async(req,res)=>{
+    try{
+        const user = await User.find();
+        res.status(200).json(user);
+    }catch(error){
+        res.status(404).json(({
+            message: error
+        }));
+    }
 }

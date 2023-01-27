@@ -5,16 +5,28 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import {BiLike} from 'react-icons/bi';
 import {RiImageAddLine} from 'react-icons/ri';
 import {Header,Sidebar,ThemeSettings} from "../components";
+import jwtDecode from "jwt-decode";
 
 
-
+let logUser;
+if(localStorage.token){
+    console.log("Do we have the data?")
+    const jwt = JSON.parse(localStorage.getItem('token'));
+    logUser = jwtDecode(jwt);
+    
+}
 
 const MainPage = () =>{
     const {setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor,themeSettings, setThemeSettings} = useStateContext();
     const [Post,setPost] = useState([]);
 
+    const [user,setUser] = useState(logUser);
+    console.log("Value :" + JSON.stringify(user.username));
 
-    
+    useEffect(()=>{
+
+    })
+
     // Calling Axios
      const getPosts = async()=>{
         await axios.get('http://localhost:8060/feed').then((res)=>{
@@ -32,7 +44,7 @@ const MainPage = () =>{
                }
                return b.postedDate > a.postedDate ? 1 : -1;
             });
-        console.log(post);
+        // console.log(post);
     }
 
     const likePost = async(id)=>{
