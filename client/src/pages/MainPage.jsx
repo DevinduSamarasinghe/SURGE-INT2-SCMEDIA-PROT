@@ -4,7 +4,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import {BiLike} from 'react-icons/bi';
 import {RiImageAddLine} from 'react-icons/ri';
-import {Header,Sidebar,ThemeSettings,Navbar} from "../components";
+import {Header,Sidebar,ThemeSettings,Navbar,Footer} from "../components";
 import jwtDecode from "jwt-decode";
 
 
@@ -135,6 +135,7 @@ const MainPage = () =>{
                                                 </figure>
                                             </div>
                                         </div>
+                                        <Footer />
                                 </div>
                                 )
                             })}

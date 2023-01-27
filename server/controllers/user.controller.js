@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import auth from "../middleware/auth.js";
+import axios from "axios";
 const router = express.Router();
 
 export const registerUser = async(req,res)=>{
@@ -66,5 +67,24 @@ export const getAllUsers = async(req,res)=>{
         res.status(404).json(({
             message: error
         }));
+    }
+}
+
+export const captchaVerify = async(req,res,next)=>{
+    if(!req.body.token){
+        return res.status(400).json({error: message + "Recaptcha Token is missing"});
+    }
+
+    try{
+        const googleVerifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRETRECAPTCHA}&response=${req.body.token}`;
+        const response = await axios.post(googleVerifyUrl);
+        const {success} = response.data;
+        if(success){
+            return res.json({success: true});
+        }else{
+            return res.json({error: "Invalid Captcha"});
+        }
+    }catch(error){
+        return res.json({error: message});
     }
 }

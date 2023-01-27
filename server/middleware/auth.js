@@ -12,6 +12,5 @@ export default function(req,res,next){
     }catch(error){
         res.status(40).send("Invalid Token");
     }
-  
-    
+
 }

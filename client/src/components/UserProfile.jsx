@@ -4,6 +4,7 @@ import { Button } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
 import KG from '../data/KG.png';
 import jwtDecode from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
 
 let logUser;
 if(localStorage.token){
@@ -16,7 +17,7 @@ if(localStorage.token){
 const UserProfile = () => {
   const { currentColor } = useStateContext();
 
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const [user,setUser] = useState(logUser);
@@ -27,7 +28,8 @@ const UserProfile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location("/");
+    localStorage.removeItem('_grecaptcha');
+    navigate("/");
   };
 
   //const user = JSON.parse(localStorage.getItem('token'));

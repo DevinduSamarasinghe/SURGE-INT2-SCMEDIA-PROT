@@ -1,6 +1,6 @@
 import express from 'express';
 import { createPost, getAllPosts ,likePost} from '../controllers/posts.controller.js';
-import { registerUser, authUser,getUser, deleteUser, getAllUsers} from '../controllers/user.controller.js';
+import { registerUser, authUser,getUser, deleteUser, getAllUsers, captchaVerify} from '../controllers/user.controller.js';
 import auth from "../middleware/auth.js";
 const router = express.Router();
 
@@ -12,6 +12,10 @@ router.post("/",authUser);
 router.get("/profile",auth,getUser);
 router.delete("/delete/:id",deleteUser);
 router.get("/viewAll",getAllUsers);
+
+//captcha
+
+router.post("/recaptcha",captchaVerify)
 //Posts Routes
 router.get("/feed",getAllPosts);
 router.post("/createPost",createPost);
