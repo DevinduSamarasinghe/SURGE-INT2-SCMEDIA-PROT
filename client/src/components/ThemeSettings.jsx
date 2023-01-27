@@ -110,7 +110,7 @@ const ThemeSettings = () => {
                                     //console.log(newPost)
                                     await axios.post("http://localhost:8060/createPost",newPost).then((res)=>{
                                         alert("Data Saved Successfully!");
-                                        window.location("/feed");
+                                        window.location="/feed";
                                     }).catch((err)=>{
                                         console.log(err);
                                         alert(err);
