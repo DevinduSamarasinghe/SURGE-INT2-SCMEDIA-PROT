@@ -39,11 +39,10 @@ function UserRegistration() {
         <div className=" text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden">
           <div className="md:flex w-full">
             <div className="hidden md:block w-1/2 bg-red-500 py-10 px-10">
-            <img className ="w-400" src={logo}>
+            <img className ="w-400" src={logo} alt={""}>
+              
 
             </img>
-
-            
             </div>
             <div className="w-full md:w-1/2 py-10 px-5 md:px-10 bg-gray-100">
               <div className="text-center mb-10">
@@ -98,7 +97,7 @@ function UserRegistration() {
                         <input
                           type="text"
                           className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-cyan-500"
-                          placeholder="Name"
+                          placeholder="Eg: Rebecca"
                           required="required"
                           onChange={(e) => setFirstName(e.target.value)}
                         />
@@ -117,7 +116,7 @@ function UserRegistration() {
                         <input
                           type="text"
                           className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-cyan-500"
-                          placeholder="Name"
+                          placeholder="Eg: Parks"
                           required="required"
                           onChange={(e) => setLastName(e.target.value)}
                         />
@@ -155,7 +154,7 @@ function UserRegistration() {
                         <input
                           type="text"
                           className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-cyan-500"
-                          placeholder="Name"
+                          placeholder="Username"
                           required="required"
                           onChange={(e) => setUsername(e.target.value)}
                         />

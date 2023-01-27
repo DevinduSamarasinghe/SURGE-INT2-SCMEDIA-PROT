@@ -135,12 +135,13 @@ const MainPage = () =>{
                                                 </figure>
                                             </div>
                                         </div>
-                                        <Footer />
+                                        
                                 </div>
                                 )
                             })}
                         </div>
                         </div>
+                        <Footer />
                     </div>
                 </div>
             </div>

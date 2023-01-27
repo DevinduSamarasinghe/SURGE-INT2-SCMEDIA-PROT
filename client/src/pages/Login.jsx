@@ -38,7 +38,7 @@ const Login = () =>{
   };
     return(
         <div>
-            <body className="h-screen overflow-hidden flex items-center justify-center bg-main-dark-bg">
+          <body className="h-screen overflow-hidden flex items-center justify-center bg-main-dark-bg">
       <script
         src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
         defer

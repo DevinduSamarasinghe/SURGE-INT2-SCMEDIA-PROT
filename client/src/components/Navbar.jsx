@@ -1,14 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { FiShoppingCart } from 'react-icons/fi';
-import { BsChatLeft } from 'react-icons/bs';
-import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 import KG from '../data/KG.png';
-import { Cart, Chat, Notification, UserProfile, FilterPopup } from '.';
+import { UserProfile } from '.';
 import { useStateContext } from '../contexts/ContextProvider';
+import jwtDecode from "jwt-decode";
+
+
+let logUser;
+if(localStorage.token){
+    console.log("Do we have the data?")
+    const jwt = JSON.parse(localStorage.getItem('token'));
+    logUser = jwtDecode(jwt);
+    
+}
 
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
@@ -28,6 +35,11 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 );
 
 const Navbar = () => {
+
+const [user,setUser] = useState(logUser);
+let username = JSON.stringify(user.username);
+username = username.replace(/"/g,'');
+
   const {
     currentColor,
     activeMenu,
@@ -37,7 +49,7 @@ const Navbar = () => {
     setScreenSize,
     screenSize,
   } = useStateContext();
-  const user = JSON.parse(localStorage.getItem('token'));
+  //const user = JSON.parse(localStorage.getItem('token'));
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -80,7 +92,7 @@ const Navbar = () => {
             />
             <p>
               <span className="text-gray-400 text-14">Hi,</span>{' '}
-              <span className="text-gray-400 font-bold ml-1 text-14">
+              <span className="text-gray-400 font-bold ml-1 text-14 capitalize">
                 {user.username}
                 {/* Michael */}
               </span>
