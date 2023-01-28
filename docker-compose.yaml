@@ -1,32 +1,41 @@
-version : "3.8"
-
+version : "3"
 services:
   mongodb:
-    image : "mongo"
+    image : mongo:4.4-bionic
+
+    networks:
+      - surge
     volumes:
       - data:/data/db
   server:
-    build: ./server
+    image: api-server
+    build: ./server/
     ports:
-      - "80:80"
+      - "8060:8060"
+    networks:
+      - surge
     volumes:
-      - ./server:/server
+      - ./server/:/usr/src/app
       - /server/node_modules
-    
     depends_on:
       - mongodb
     
   client:
-    build: ./client
+    image: react-app
+    build: ./client/
     ports:
       - "3000:3000"
-    volumes:
-     - ./client/src:/app/src
     stdin_open: true
-    tty: true
-    depends_on:
-      - server
+    networks:
+      - surge
+    volumes:
+      - ./client/:/usr/src/app
+      - /usr/src/app/node_modules
+networks:
+  surge:
+    driver: bridge
 volumes:
   data:
+    driver: local
   logs:
 
