@@ -5,4 +5,14 @@ Cluster access authentication - Username: davex | Password: admin123
 
 Created Test login - email: test001@gmail.com
                      password: admin123
+                     
+Functionalities (Both tertiary and primary)
+
+Primary
+- Login authentication and authorization with form validations, JWT , reCaptcha
+- Post likes and date sort algorithm 
+- Creating posts
+
+Tertiary 
+- Dark mode and light mode.
 
