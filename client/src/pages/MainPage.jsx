@@ -75,10 +75,10 @@ const MainPage = () =>{
 
                     {/* Theme Sttings Button */}
                     <div className='fixed right-5 bottom-4' style={{ zIndex: '1000' }}>
-                        <TooltipComponent content="Create Post" position="Bottom">
-                            <button
+                        <TooltipComponent content="Change Theme and Post" position="Bottom">
+                            <button 
                                 type='button' onClick={()=>setThemeSettings(true)}
-                                style={{ background: currentColor, borderRadius: '50%' }}
+                                style={{ background: currentColor, borderRadius: '30%' }}
                                 className="text-3xl text-white p-3 hover:drop-shadow-xl hover:bg-light-gray"
                             >
                                 {/* Applying Emoji */}
